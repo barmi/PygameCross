@@ -18,10 +18,10 @@
 ## Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 ###############################################################################
 
-VACIO = 0
-RELLENO = 1
-EQUIS = 2
+EMPTY = 0
+MARK_O = 1
+MARK_X = 2
 
-ANCHO = 800
-ALTO = 600
-RESOLUCION = (ANCHO, ALTO)
+WIDTH = 800
+HEIGHT = 600
+RESOLUTION = (WIDTH, HEIGHT)

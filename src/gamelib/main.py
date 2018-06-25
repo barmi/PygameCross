@@ -18,43 +18,44 @@
 ## Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 ###############################################################################
 
-from objects import *
-from constants import RESOLUCION
+from gamelib.objects import *
+from gamelib.constants import RESOLUTION
+from gamelib.menus import actualizar_menu, dibujar_menu, extras, dibujar_menu2, actualizar_menu2
 from pygame.locals import KEYDOWN, K_ESCAPE, MOUSEBUTTONDOWN
-from menus import actualizar_menu, dibujar_menu, extras, dibujar_menu2, actualizar_menu2
+
 
 def main():
     ''' '''
-    screen = pygame.display.set_mode(RESOLUCION)
+    screen = pygame.display.set_mode(RESOLUTION)
     pygame.display.set_caption("PygameCross 0.0.5")
     
-    reloj = pygame.time.Clock()
+    clock = pygame.time.Clock()
     color = (0, 0, 0)
     size = ''
-    empezado = terminado = res = False
+    started = finished = res = False
     loop = menu = menu2 = True
-    longitud = 0
+    length = 0
     linea = 0
     
     while loop:
-        reloj.tick(50)
+        clock.tick(50)
         screen.fill((255,233,165))
         
         if menu:
             dibujar_menu(screen)
         elif menu2:
-            longitud = dibujar_menu2(screen, size)
+            length = dibujar_menu2(screen, size)
         else:
-            if not empezado:
-                tablero = Tablero(int(size[0:2]), int(size[3:5]), linea, size) ##change change change
+            if not started:
+                tablero = Board(int(size[0:2]), int(size[3:5]), linea, size) ##change change change
             if res:
                 extras(screen)
-                tablero.completar()
+                tablero.to_complete()
                 color = (0, 153, 0)
-                terminado = True
+                finished = True
                 
-            empezado = True
-            tablero.dibujar_tablero(screen, color)       
+            started = True
+            tablero.draw_table(screen, color)
         
         pygame.display.flip()
         
@@ -67,12 +68,12 @@ def main():
                 if menu:
                     menu, size = actualizar_menu()
                 elif menu2:
-                    menu2, linea = actualizar_menu2(longitud)
-                elif not terminado:
+                    menu2, linea = actualizar_menu2(length)
+                elif not finished:
                     if tablero.actualizar():
-                        res = tablero.analisis()
-                elif terminado:
+                        res = tablero.analysis()
+                elif finished:
                     menu = menu2 = True
-                    res = terminado = empezado = False
+                    res = finished = started = False
                     tablero.reset()
                     color = (0, 0, 0)

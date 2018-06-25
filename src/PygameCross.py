@@ -20,11 +20,10 @@
 ###############################################################################
 
 import sys
-sys.path.insert(0, "gamelib")
-
 import pygame
-import main
+from gamelib import main
 
 if __name__ == "__main__":
+    sys.path.insert(0, ".")
     pygame.init()
     main.main()
