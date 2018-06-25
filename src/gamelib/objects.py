@@ -70,8 +70,8 @@ class Tablero:
         sum = 0
         list = []
         self.listoflists = []
-        for i in xrange(self.filas):
-            for j in xrange(self.columnas):
+        for i in range(self.filas):
+            for j in range(self.columnas):
                 if self.sol[i][j] == 1:
                     uno = True
                     if uno:
@@ -93,8 +93,8 @@ class Tablero:
         sum = 0
         list = []
         self.listoflists2 = []
-        for i in xrange(self.columnas):
-            for j in xrange(self.filas):
+        for i in range(self.columnas):
+            for j in range(self.filas):
                 if self.sol[j][i] == 1:
                     uno = True
                     if uno:
@@ -118,16 +118,16 @@ class Tablero:
         
     def completar(self):
         ''' '''
-        for i in xrange(self.filas):
-            for j in xrange(self.columnas):
+        for i in range(self.filas):
+            for j in range(self.columnas):
                 if self.celdas[i][j] == VACIO:
                     self.celdas[i][j] = EQUIS
                 
     def crear_celdas(self, num_fil, num_col, tipo):
         ''' '''
         celdas = []
-        for i in xrange(num_fil):
-            celdas.append([tipo for i in xrange(num_col)])
+        for i in range(num_fil):
+            celdas.append([tipo for i in range(num_col)])
         return celdas
     
     def agregar_tipos(self):
@@ -141,9 +141,9 @@ class Tablero:
         ''' '''
         tamano = self.tipos[0].get_width()
         
-        for i in xrange(len(self.celdas) + 1):
+        for i in range(len(self.celdas) + 1):
             pygame.draw.line(surface, (0, 0, 0), (ANCHO / 2 - 20, i * tamano + ALTO / 2 - 120), (self.columnas * tamano + ANCHO / 2 - 20, i * tamano + ALTO / 2 - 120), 2)
-        for i in xrange(len(self.celdas[0]) + 1):
+        for i in range(len(self.celdas[0]) + 1):
             pygame.draw.line(surface, (0, 0, 0), (i * tamano + ANCHO / 2 - 20, ALTO / 2 - 120), (i * tamano + ANCHO / 2 - 20, self.filas * tamano + ALTO / 2 - 120), 2)
         
         x = y = 0
@@ -169,7 +169,7 @@ class Tablero:
             aux += 20 
         
         aux, aux2 = 0, 40
-        for i in xrange(self.filas):
+        for i in range(self.filas):
             for j in self.listoflists[i].__reversed__():
                 if j > 9:
                     surface.blit(self.fuente.render(str(j), True, color), (ANCHO / 2 - aux2 - 5, ALTO / 2 + 1 + aux - 120))
@@ -197,8 +197,8 @@ class Tablero:
         
         if boton[0] or boton[2]:
             x, y = pygame.mouse.get_pos() 
-            posicionx = (x / self.tipos[0].get_width()) - 19 
-            posiciony = (y / self.tipos[0].get_width()) - 9
+            posicionx = (x // self.tipos[0].get_width()) - 19
+            posiciony = (y // self.tipos[0].get_width()) - 9
             if (posicionx < self.columnas and posicionx >= 0) and (posiciony < self.filas and posiciony >= 0):
                 if self.celdas[posiciony][posicionx] == RELLENO or self.celdas[posiciony][posicionx] == EQUIS:
                     self.celdas[posiciony][posicionx] = VACIO
@@ -217,8 +217,8 @@ class Tablero:
         ''' '''        
         res = True
         
-        for i in xrange(self.filas):
-            for j in xrange(self.columnas):
+        for i in range(self.filas):
+            for j in range(self.columnas):
                 if (self.sol[i][j] == self.celdas[i][j] or self.sol[i][j] + 2 == self.celdas[i][j]) and res:
                     res = True
                 else:

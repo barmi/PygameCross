@@ -115,11 +115,11 @@ def actualizar_menu2(longitud):
     lista = []
     aux = 50
     
-    for i in xrange(longitud):
+    for i in range(longitud):
         lista.append(aux)
         aux += 30
     if boton[0] and x >= 50 and x <= 70 and y >= 50 and y <= 40 + longitud * 30:
-        for j in xrange(20):
+        for j in range(20):
             if lista.__contains__(y-j):
                 return False, y-j
     
